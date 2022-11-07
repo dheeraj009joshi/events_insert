@@ -6,6 +6,7 @@ import urllib.parse
 import time
 import ssl
 import logging
+from config import Base_url
 import json
 from concurrent.futures import ThreadPoolExecutor as PoolExecutor
 import random
@@ -15,9 +16,9 @@ def job(city_id):
 
 
     try:
-        main=re.post("http://scouterlive.ap-south-1.elasticbeanstalk.com/api/v1/Place/GetPlaceNames",json=data).json()
+        main=re.post(f"{Base_url}/api/v1/Place/GetPlaceNames",json=data).json()
     except:
-        main=re.post("http://scouterdev.ap-south-1.elasticbeanstalk.com/api/v1/Place/GetPlaceNames",json=data).json()
+        main=re.post(f"{Base_url}/api/v1/Place/GetPlaceNames",json=data).json()
     googlePlaceName=[]
     for i in main["data"]:
         place_name=i["googlePlaceName"]

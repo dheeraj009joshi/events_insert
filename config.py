@@ -1,1 +1,4 @@
-yelp_access_key=''
+yelp_access_key='4oSmDspvvCPyFbvKmQonmWfk1dXeMgfMUX7Di3Vp6Hmkql0EkinEKUEVvDPQTKl_bmcJzYc_w7wEaNRlrj-W5kaljcN-lvvJKKgPzkAmo-CPEN0iiFaikj4Tk-YHYx'
+ACCESS_KEY = 'AKIAYRWME3LABTW6SIPN'
+SECRET_KEY = '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'
+Base_url="https://scouterbigserver.azurewebsites.net"

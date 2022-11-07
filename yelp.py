@@ -49,11 +49,11 @@ def yelp_scrape(city):
         display_phone=[]
         distance=[]
         cate_gories=[]
-
+        print(city)
         for line in csv_reader:
             print(line[0])
             Url='https://api.yelp.com/v3/businesses/search'
-            key =yelp_access_key
+            key = '4oSmDspvvCPyFbvKmQonmWfk1dXeMgfMUX7Di3Vp6Hmkql0EkinEKUEVvDPQTKl_bmcJzYc_w7wEaNRlrj-_W5kaljcN-lvvJKKgPzkAmo-CPEN0iiFaikj4Tk_-YHYx'
             headers = {
                 'Authorization':'Bearer %s' %key
             }
@@ -74,7 +74,6 @@ def yelp_scrape(city):
             offset=np.arange(0,200,50)
 
             tuples=list(product(address,offset))
-
 
             for adress,step in tuples:
                 search_parameters={
@@ -207,10 +206,12 @@ def yelp_scrape(city):
         # "phone":phone,
         # "display_phone":display_phone,
         # "distance":distance,
-        "cate_gories":cate_gories
+        "cate_gories":categories
 
         })
         filename=f'{city}_yelp_places_.csv'
         de2=df.drop_duplicates(subset=["name","address1","cate_gories"],keep="first")
         de2.to_csv(filename,index=False)
         return filename
+    
+# yelp_scrape("atlanta")
