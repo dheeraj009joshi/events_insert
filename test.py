@@ -40,21 +40,27 @@ country=input(" please enter country :- ")
 
 with open(f"Eventbrite_scraping_EVENTS.csv", 'r') as file:
     csvreader = csv.reader(file)
+    
     for row in csvreader:
+       print(row[6])
        Headers = {"Content-Type":"application/json" }
        url=f"{Base_url}/api/v1/Mobile/RequestForAPI"
        data={
-    "StoredProcedureName": "API_LOAD_PLACE_Address",
-    "Params1": row[6]
+        "StoredProcedureName": "API_LOAD_PLACE_Address",
+        "Params1": row[6]
 }
-     
-r=re.post(url,data=json.dumps(data),headers=Headers)
-if r.json()["data"][0]['placeId']:
-        print(r.json())
-        print("Location matched")
-else:
-        res=google_place_info(city_id,row[6],row[7],country)
-        print(res)
+       print(data)
+       r=re.post(url,data=json.dumps(data),headers=Headers)
+       print(r.json())
+
+
+
+#if r.json()["data"][0]['placeId']:
+#       print(r.json())
+#        print("Location matched")
+#else:
+#        res=google_place_info(city_id,row[6],row[7],country)
+#        print(res)
         
         
                 # insert_event(city_id,row,place_id) 

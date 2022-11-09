@@ -121,13 +121,25 @@ def get_events(city_name):
                                         placenames.append(placename)
                                         print(loc)
                                         print(placename)
-                                except:
-                                        loc=(driver.find_element(By.XPATH,'//*[@id="root"]/div/div/div[2]/div/div/div/div[1]/div/main/div/div[1]/div[2]/div[2]/section/div[1]/div[2]/section[2]/div[2]/p').text)       
-                                        placename=driver.find_element(By.XPATH,'//*[@id="root"]/div/div/div[2]/div/div/div/div[1]/div/main/div/div[1]/div[2]/div[2]/section/div[1]/div[2]/section[2]/div[2]/p/strong').text
-                                        address.append(loc)
-                                        placenames.append(placename)
-                                        print(loc)
-                                        print(placename)
+                                except:  
+                                        try:
+                                                loc=(driver.find_element(By.XPATH,'//*[@id="root"]/div/div/div[2]/div/div/div/div[1]/div/main/div/div[1]/div[2]/div[2]/section/div[1]/div[2]/section[2]/div[2]/p').text)       
+                                                placename=driver.find_element(By.XPATH,'//*[@id="root"]/div/div/div[2]/div/div/div/div[1]/div/main/div/div[1]/div[2]/div[2]/section/div[1]/div[2]/section[2]/div[2]/p/strong').text
+                                                address.append(loc)
+                                                placenames.append(placename)
+                                                print(loc)
+                                                print(placename)
+                                        
+                                        except:
+                                        
+                                        
+                                        #//*[@id="root"]/div/div/div[2]/div/div/div/div[1]/div/main/div/div[1]/div[2]/div[2]/section/div[1]/div[2]/section/div[2]/p
+                                                loc=(driver.find_element(By.XPATH,'//*[@id="root"]/div/div/div[2]/div/div/div/div[1]/div/main/div/div[1]/div[2]/div[2]/section/div[1]/div[2]/section/div[2]/p').text)       
+                                                placename=driver.find_element(By.XPATH,'//*[@id="root"]/div/div/div[2]/div/div/div/div[1]/div/main/div/div[1]/div[2]/div[2]/section/div[1]/div[2]/section/div[2]/p/strong').text
+                                                address.append(loc)
+                                                placenames.append(placename)
+                                                print(loc)
+                                                print(placename)
                         except Exception as e:
                                 address.append("Atlanta")
                                 placenames.append("")
