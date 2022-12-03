@@ -85,9 +85,10 @@ def yelp_scrape(city):
                 }
                 res=r.get(Url,headers=headers,params=search_parameters)
                 ras_data=res.json()
-                print(ras_data)
+                print(f" Getting Places For {city}")
+                # print(ras_data)
                 for item in ras_data['businesses']:
-                    print(item)
+                    # print(item)
                     cate_gories.append(line[0])
                     try:
                         id.append(item['id'])
@@ -111,7 +112,7 @@ def yelp_scrape(city):
                         maindata=[]
                         for names in main:
                             i=names['title']
-                            print(f'{i}\n')
+                            # print(f'{i}\n')
                             maindata.append(i)
                         maindata=str(maindata).replace("'","").replace("[","").replace("]","")
                         categories.append(maindata)
@@ -146,18 +147,10 @@ def yelp_scrape(city):
                         price.append(item['price'])
                     except:
                         price.append('none')
-                    try:
-                        address1.append(item['location']['address1'])
-                    except:
-                        address1.append('none')
-                    try:
-                        address2.append(item['location']['address2'])
-                    except:
-                        address2.append('none')
-                    try:
-                        address3.append(item['location']['address3'])
-                    except:
-                        address3.append('none')
+
+                    print(f"{item['location']['address1']}, {item['location']['city']}, {item['location']['state']}, {item['location']['zip_code']}" )
+                    address1.append(f"{item['location']['address1']}, {item['location']['city']}, {item['location']['state']}, {item['location']['zip_code']}" )
+
             
                     try:
                         zip_code.append(item['location']['zip_code'])
@@ -185,7 +178,9 @@ def yelp_scrape(city):
                         distance.append('none')
                         
         
-
+        # print(len(name))
+        # print(len(address1))
+        # print(len(categories))
 
         df=pd.DataFrame({
         # "id":id,
@@ -209,6 +204,7 @@ def yelp_scrape(city):
         "cate_gories":categories
 
         })
+
         filename=f'{city}_yelp_places_.csv'
         de2=df.drop_duplicates(subset=["name","address1","cate_gories"],keep="first")
         de2.to_csv(filename,index=False)

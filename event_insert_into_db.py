@@ -16,8 +16,18 @@ def insert_event(city_id,record,place_id):
             "Hide": False
         }
         res = re.post(url, json=data,verify=False)
-        print(data)
+        # print(data)
+        print("")
+        print("")
+        print("")
+        print("")
         print('time', 'message',  'inserted event :- ' + res.text)
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        return data
     except Exception as err:
         print(err)
     

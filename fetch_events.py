@@ -1,5 +1,6 @@
 from datetime import datetime
 from email.headerregistry import Address
+import time
 from selenium import webdriver
 import json
 import pandas as pd
@@ -30,8 +31,7 @@ def get_events(city_name):
         address=[]
 
 
-        for i in range(1,2):
-        
+        for i in range(1,int(no_link)):
                 driver.get(f'https://www.eventbrite.com/d/ga--{city_name}/food-and-drink--events/?page={i}')
                 all_url=driver.find_elements(By.XPATH,'//*[@id="root"]/div/div[2]/div/div/div/div[1]/div/main/div/div/section[1]/div[1]/section/ul/li/div/div/div[1]/div/div/div/article/div[2]/div/div/div[1]/a')
                 all_urls=[]
@@ -47,7 +47,7 @@ def get_events(city_name):
                         index_date+=1    # print(all_urls)
                 len_date=0
                 for o in all_urls:
-                        city.append("Atlanta")
+                        city.append(city_name)
                         Date=all_dates[len_date]
                         try:
                                 if "Today" in Date:
@@ -152,13 +152,13 @@ def get_events(city_name):
                                         Decs.append(f'{o} {description}')
                         except:
                                 Decs.append(f'{o}')
-                        try:   
-                                a=get_details((f"{placename} Atlanta") )
-                                print(a['Types'])
-                                placetype=a['Types']
-                                PlaceType.append(placetype)
-                        except:
-                                PlaceType.append("night club")  #karan 
+                        # try:   
+                        #         a=get_details((f"{placename} Atlanta") )
+                        #         print(a['Types'])
+                        #         placetype=a['Types']
+                        #         PlaceType.append(placetype)
+                        # except:
+                        #         PlaceType.append("night club")  #karan 
                         
         print(len(Images))
         print(len(Titles))
@@ -174,30 +174,21 @@ def get_events(city_name):
                 "eventstartdate":Dates,
                 "eventDescription":Decs,
                 "Address":address,
-                "placeType":PlaceType
+                # "placeType":PlaceType
         })
-        df.dropna(
-        axis=0,
-        how='any',
-        subset=None,
-        inplace=True
-        )
+        df.dropna(how='any')
         df.drop_duplicates()
         df.to_csv("Eventbrite_scraping_EVENTS.csv",index=False)
 
         df2=pd.DataFrame({
         "Name":placenames,
         "Address":address,
-        "PlaceType":PlaceType
+        # "PlaceType":PlaceType
         })
-        df2.dropna(
-        axis=0,
-        how='any',
-        subset=None,
-        inplace=True
-        )
+        df2.dropna(how='any',)
         df2.drop_duplicates()
         df2.to_csv("Eventbrite_scraping_places.csv",index=False)
+        time.sleep(0.5)
 
 
 
